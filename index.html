@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<!-- 2024/5/7 仮バージョンを試用サイトにアップロード
+5/14 内部コード修正
+6/19 「差別語・不快語・要注意語データベース」に対応
+7/16 CSVファイルの入出力に対応 
+7/22 内部コード修正、CSVファイルの直接読み書きに対応
+7/23 差別語・不快語・要注意語を別扱いで処理
+10/3  仮公開バージョン
+10/10 (仮)を削除
+10/28 差別語・不快語・要注意語DBのURL修正
+10/30 ワードの色分けを変更。リスト読み込み時の不具合を改修
+11/6 ワードリスト作成ツールを実装
+2025/4/18 図鑑NEO用カスタマイズ版制作-->
+
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="img/QCfavicon.ico">
+  <title>表記Quickチェッカー</title>
+</head>
+
+<body>
+  <header>
+    <nav class="pc-nav">
+      <ul>
+        <li><a class="gray" href="index.html">表記Quickチェッカー</a></li>
+        <li><a href="about.html">使い方</a></li>
+        <li><a href="yougodb.html">差別語・不快語・要注意語</a></li>
+        <li><a href="selectsheet.html">ワードリストをつくる</a></li>
+      </ul>
+    </nav>
+
+    <nav class="sp-nav">
+      <ul>
+        <li><a href="index.html">表記Quickチェッカー</a></li>
+        <li><a href="about.html">使い方</a></li>
+        <li><a href="yougodb.html">差別語・不快語・要注意語</a></li>
+        <li><a href="selectsheet.html">ワードリストをつくる</a></li>
+        <li class="close"><span>閉じる</span></li>
+      </ul>
+    </nav>
+
+    <div id="hamburger">
+      <span></span>
+    </div>
+
+    <h1>漢字&表記<span class="red qq">Q</span>uickチェッカー <span class="red">NEOカスタマイズ版</span>2025/5/15<br></h1>
+    <div class="subtitle">produced by Shogakukan Shuppan <span class="red qqq">Q</span>uality Center</div>
+  </header>
+
+
+  <P>
+    <br><span class="aoami">表記揃えワード</span>　<span class="akaami">修正検討ワード</span>　<span class="greenami">要検討ワード</span>　<span class="kiami">差別語・不快語・要注意語</span>
+    <br><span class="kanji joyo under4"><ruby>教<rt>2</rt></ruby></span><span class="kanji joyo under4"><ruby>育<rt>2</rt></ruby></span><span class="kanji joyo under4"><ruby>漢<rt>3</rt></ruby></span><span class="kanji joyo under4"><ruby>字<rt>1</rt></ruby></span>　<span class="kanji joyo under4"><ruby>飼<rt>99</rt></ruby>(NEOで使用する字)　</span><span class="kanji over4">小五配当以上の常用漢字</span>　<span class="kanji">常用漢字表外の漢字</span></P>
+
+  <section class="section3">
+    <p class="accordion_title js-accordion-title">くわしい説明はここをクリック！
+    </p>
+
+    <div class="accordion_content">
+
+      <p>
+        このチェッカーは、図鑑NEO「新版 飼育と観察」の表記ルールに合わせたリアルタイムチェックツールです。漢字Quickチェッカーと表記Quickチェッカーを統合して制作されています。
+
+       <br><br> <表記チェック機能>
+          <br>「差別語・不快語・要注意語リスト」と「図鑑NEO用表記統一ワードリスト」をもとにチェックします。リストはカスタマイズできます。やり方は通常の表記チェッカーと同様です。checkボタンを押す必要はなく、入力すると自動的にチェックが始まります。
+          <br>青色オビの<span class="aoami">表記揃えワード</span>は、表記表でOKとされている語です。
+          <br>赤色オビの<span class="akaami">修正検討ワード</span>は、表記表で使わないとされている語です。
+          <br>緑色オビの<span class="greenami">要検討ワード</span>は、使い分けが必要な語です。
+          <br>黄色オビは<span class="kiami">差別語・不快語・要注意語</span>です。
+          <br>色オビにマウスを乗せておくと、多くの場合詳しい情報が出ます。
+          <br>　※検出結果のリスト出力機能はありません。
+          <br><br>＜漢字チェック機能＞
+          <br>「表記チェック」で色付けされた字には漢字チェックはされません。また異体字のチェックは行いません。
+          <br>ルビ付きの文字は教育漢字です。図鑑NEOでは原則小学四年生までの漢字を使用します。
+          <br>「新版 飼育と観察」で、小五以上の配当漢字にもかかわらず漢字表記とする下記の21字は、「99」のルビをつけます。
+          <br>　<span class="big160">洗網磯枝飼肩枯茎粉潮吸砂卵敵苗似煮肺幹胸戻</span>
+          <br>オレンジ色は<span class="kanji over4">小学五年生以上で学習する常用漢字</span>です。
+          <br>赤字は<span class="kanji">常用漢字外の漢字</span>で表示します。
+          <br>図鑑NEOの標準表記ルールは、「小四以下の教育漢字＋常用漢字＝漢字使用」です。
+          <br>　※検出結果のリスト出力機能はありません。
+          <br>
+          <!-- <br>＜tips＞
+          <br>・気になる単語や文章を、こまめにサッと入力してチェックする、という使い方を想定しています。長文をチェックする時には、単体のチェッカーをご使用ください。
+          ・機械的にチェックしているので、色オビがついたワードのチェック結果は必ずしも正しくありません。必要に応じ、元の表に立ち戻ってご確認ください。
+          <br>・規定の用語集に載っているワードを入力しても、想定通りにチェックされない場合があります。
+        <br>・特に「漢字にするか、ひらくか」をチェックするときには、かなではなく、漢字でチェックした方がいいです。-->
+
+      </p>
+
+      <br>
+    </div>
+
+  </section>
+
+
+
+
+  <section class="section0">
+    <h3 class="accordion_title js-accordion-title">差別語・不快語・要注意語リスト
+      <span class="titleList">（使用ファイル：
+        <span id="safuchuFileName">差不注DB＋QCリスト.csv
+        </span>）
+      </span>
+    </h3>
+
+    <div class="accordion_content">
+
+      <table id="safuchuList"></table>
+
+      <br><button id="clearSafuchuButton"> 差別語・不快語・要注意語チェックをしない</button>
+
+      <br>
+    </div>
+
+  </section>
+
+
+  <section class="section1">
+    <h3 class="accordion_title js-accordion-title">表記統一ワードリスト
+      <span class="titleList">（使用ファイル：
+            <span id="criteriaInputFileName">NEO検索ワード(飼育観察).csv
+        </span>）
+      </span>
+    </h3>
+
+    <div class="accordion_content">
+
+      <table id="tateList"></table>
+
+      <br><button id="clearCriteriaButton"> 表記統一ワードを消去する</button>
+      <button id="saveCriteriaButton">外部に保存する</button>
+
+      <br><br>
+      <label>表記統一ワードの読み込み：
+        <button id="fileInputButton">ファイルを選択する</button>
+        <input type="file" accept=".txt, .csv" id="fileInput">
+      </label>
+      <br>
+    </div>
+
+  </section>
+
+
+
+  <h3>　　調べたいテキスト</h3>
+
+  <div class="section2">
+    <textarea id="input" placeholder="調べたいテキストを入力してください。リアルタイムでチェックします。"></textarea>
+  </div>
+
+  <p>
+    <!-- <button id="checkButton">Check</button> -->
+    <button id="clearButton">Clear Text</button>
+  </p>
+
+  <p id="chuuki"></p>
+  <table id="criteriaYellowList"></table>
+  <table id="criteriaList"></table>
+  <table id="criteriaGreenList"></table>
+  <p id="output" contenteditable="true"></p>
+
+  <p id="output2" contenteditable="true"></p>
+
+  <div id="qualityCenter">本WEBアプリは小学館出版クォリティーセンターが制作しました<br><br>last updated at 2024/11/6
+    <br>coding by Nobuo Tsukahara
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
